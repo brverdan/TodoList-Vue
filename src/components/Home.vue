@@ -1,0 +1,46 @@
+<template>
+  <v-container class="height-100 d-flex align-center">
+    <v-row class="d-flex justify-center">
+      <v-col cols="3">
+        <h2>ToDo List</h2>
+        <v-col cols="12" class="form">
+          <v-form>
+            <v-text-field label="E-mail" required></v-text-field>
+
+            <v-text-field label="Senha" required type="password"></v-text-field>
+            <v-row class="justify-space-around">
+              <v-btn color="secondary" class="btn" dark :to="{ name: 'toDo'}">Login</v-btn>
+              <v-btn color="secondary" class="btn" dark>Cadastrar</v-btn>
+            </v-row>
+          </v-form>
+        </v-col>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  name: "Home",
+
+  data: () => ({})
+};
+</script>
+<style scoped>
+.btn {
+  width: 40%;
+  margin-left: 1%;
+}
+.height-100 {
+  height: 100%;
+}
+.form {
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid black;
+}
+h2 {
+  text-align: center;
+  color: white;
+}
+</style>
