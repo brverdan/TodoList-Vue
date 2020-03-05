@@ -12,34 +12,31 @@
     <v-simple-table>
       <thead>
         <tr>
-          <th>
-            Tarefa:
-            <!--  <v-btn big color="primary" :to="{name:'addToDo'}">Add a new todo</v-btn> -->
-          </th>
+          <th>Tarefa:</th>
           <th class="status">Status:</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-for="(tarefa, index) in tarefas" :key="index">
           <td>
             <v-row>
               <v-col>
                 <v-expansion-panels>
-                  <v-expansion-panel v-if="success" class="success">
-                    <v-expansion-panel-header disable-icon-rotate>
-                      Item
+                  <v-expansion-panel v-if="tarefa.realizada" class="success">
+                    <v-expansion-panel-header id="tarefa" disable-icon-rotate>
+                      {{tarefa.tituloTarefa}}
                       <template v-slot:actions>
                         <v-icon>mdi-check</v-icon>
                       </template>
                     </v-expansion-panel-header>
-                    <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                    <v-expansion-panel-content>{{tarefa.descricaoTarefa}}</v-expansion-panel-content>
                   </v-expansion-panel>
                   <v-expansion-panel v-else>
                     <v-expansion-panel-header disable-icon-rotate>
-                      Item
+                      {{tarefa.tituloTarefa}}
                       <template v-slot:actions></template>
                     </v-expansion-panel-header>
-                    <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                    <v-expansion-panel-content>{{tarefa.descricaoTarefa}}</v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
               </v-col>
@@ -48,14 +45,14 @@
           <td>
             <v-row>
               <v-col>
-                <v-checkbox v-model="success" class="mx-2" label="Success"></v-checkbox>
+                <v-checkbox v-model="tarefa.realizada" class="mx-2" label="Success"></v-checkbox>
               </v-col>
             </v-row>
           </td>
         </tr>
       </tbody>
     </v-simple-table>
-    <!-- <v-expansion-panels>
+    <v-expansion-panels>
       <v-expansion-panel class="success">
         <v-expansion-panel-header disable-icon-rotate>
           Item
@@ -74,7 +71,7 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
       </v-expansion-panel>
-      <v-expansion-panel class="warning"> 
+      <v-expansion-panel class="warning">
         <v-expansion-panel-header disable-icon-rotate>
           Item
           <template v-slot:actions>
@@ -83,7 +80,7 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
       </v-expansion-panel>
-    </v-expansion-panels>-->
+    </v-expansion-panels>
   </v-container>
 </template>
 
@@ -92,8 +89,30 @@ export default {
   name: "TodoList",
 
   data: () => ({
-    success: false
-  })
+    success: true,
+    tarefas: [
+      {
+        tituloTarefa: "aaaaaa",
+        descricaoTarefa: "sasasasa",
+        status: "",
+        realizada: false
+      },
+      {
+        tituloTarefa: "bbbbbbb",
+        descricaoTarefa: "sasasasa",
+        status: "",
+        realizada: false
+      }
+    ]
+  }),
+  methods: {
+    trocarClasses: function() {
+      if (this.success) {
+        document.getElementById("tarefa").classList.remove("success");
+        document.getElementById("tarefa").classList.add("warning");
+      }
+    }
+  }
 };
 </script>
 
