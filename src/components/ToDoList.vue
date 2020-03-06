@@ -12,7 +12,9 @@
     <v-simple-table>
       <thead>
         <tr>
-          <th>Tarefa:</th>
+          <th>
+            Tarefas:
+          </th>
           <th class="status">Status:</th>
         </tr>
       </thead>
@@ -22,19 +24,15 @@
             <v-row>
               <v-col>
                 <v-expansion-panels>
-                  <v-expansion-panel v-if="tarefa.realizada" class="success">
+                  <v-expansion-panel :class="tarefa.realizada == true ? 'success' : tipoDePrioridade(tarefa.status)">
                     <v-expansion-panel-header id="tarefa" disable-icon-rotate>
                       {{tarefa.tituloTarefa}}
-                      <template v-slot:actions>
+                      <template v-if="tarefa.realizada" v-slot:actions>
                         <v-icon>mdi-check</v-icon>
                       </template>
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content>{{tarefa.descricaoTarefa}}</v-expansion-panel-content>
-                  </v-expansion-panel>
-                  <v-expansion-panel v-else>
-                    <v-expansion-panel-header disable-icon-rotate>
-                      {{tarefa.tituloTarefa}}
-                      <template v-slot:actions></template>
+                      <template v-else-if="tarefa.status == 'Alta Prioridade'" v-slot:actions>
+                        <v-icon>mdi-alert-circle</v-icon>
+                      </template>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>{{tarefa.descricaoTarefa}}</v-expansion-panel-content>
                   </v-expansion-panel>
@@ -52,7 +50,7 @@
         </tr>
       </tbody>
     </v-simple-table>
-    <v-expansion-panels>
+    <!-- <v-expansion-panels>
       <v-expansion-panel class="success">
         <v-expansion-panel-header disable-icon-rotate>
           Item
@@ -80,7 +78,7 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
       </v-expansion-panel>
-    </v-expansion-panels>
+    </v-expansion-panels> -->
   </v-container>
 </template>
 
@@ -89,27 +87,38 @@ export default {
   name: "TodoList",
 
   data: () => ({
-    success: true,
+    success: false,
     tarefas: [
       {
         tituloTarefa: "aaaaaa",
         descricaoTarefa: "sasasasa",
-        status: "",
+        status: "Baixa Prioridade",
         realizada: false
       },
       {
         tituloTarefa: "bbbbbbb",
         descricaoTarefa: "sasasasa",
-        status: "",
+        status: "Média Prioridade",
         realizada: false
-      }
+      },
+      {
+        tituloTarefa: "bbbbbbb",
+        descricaoTarefa: "sasasasa",
+        status: "Alta Prioridade",
+        realizada: false
+      },
     ]
   }),
   methods: {
-    trocarClasses: function() {
-      if (this.success) {
-        document.getElementById("tarefa").classList.remove("success");
-        document.getElementById("tarefa").classList.add("warning");
+    tipoDePrioridade: function(status) {
+      if (status == "Alta Prioridade") {
+        return "error"
+      } 
+      else if (status == "Média Prioridade") {
+        return "warning"
+      }
+      else {
+        return ""
       }
     }
   }

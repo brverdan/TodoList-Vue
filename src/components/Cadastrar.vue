@@ -2,7 +2,7 @@
   <v-container class="height-100 d-flex align-center">
     <v-row class="d-flex justify-center">
       <v-col cols="3">
-          <v-app-bar color="deep-purple accent-4" dark>
+        <v-app-bar color="deep-purple accent-4" dark>
           <v-toolbar-title>Novo Usuário</v-toolbar-title>
         </v-app-bar>
         <v-col cols="12" class="form">
