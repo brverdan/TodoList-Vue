@@ -44,7 +44,7 @@
             <v-row>
               <v-col>
                 <v-checkbox v-model="tarefa.realizada" class="mx-2" label="Success"></v-checkbox>
-                <v-btn big color="primary" @click="deletar()">Deletar</v-btn>
+                <v-btn big color="primary" @click="deletarTarefa(tarefa.id)">Deletar</v-btn>
               </v-col>
             </v-row>
           </td>
@@ -56,7 +56,6 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-
 
 export default {
   name: "TodoList",
@@ -72,9 +71,15 @@ export default {
         return "";
       }
     },
-    ...mapActions(["deletarTarefa"]),
-    deletar() {
-      this.deletarTarefa();
+    ...mapActions(["deletarTarefa", "editarTarefa"]),
+    editarTarefa(tarefa) {
+      const up = {
+        id: tarefa.id,
+        tituloTarefa: tarefa.tituloTarefa,
+        descricaoTarefa: tarefa.descricaoTarefa,
+        realizada: true
+      };
+      this.editarTarefa(up);
     }
   },
   computed: {

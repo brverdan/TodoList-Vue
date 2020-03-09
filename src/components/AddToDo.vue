@@ -6,12 +6,20 @@
           <v-toolbar-title>Adicionar Tarefa</v-toolbar-title>
         </v-app-bar>
         <v-simple-table>
-            <v-col cols="12" class="align-center">
-              <v-text-field label="Título da Tarefa" type="text" v-model="tituloTarefa" required></v-text-field>
-              <v-textarea auto-grow rows="1" rows-height="2" clearable label="Descrição da tarefa" v-model="descricaoTarefa" required></v-textarea>
-              <v-select :items="prioridades" label="Prioridade" outlined required v-model="status"></v-select>
-              <v-btn big color="primary" @click="submit()">Salvar</v-btn>
-            </v-col>
+          <v-col cols="12" class="align-center">
+            <v-text-field label="Título da Tarefa" type="text" v-model="tituloTarefa" required></v-text-field>
+            <v-textarea
+              auto-grow
+              rows="1"
+              rows-height="2"
+              clearable
+              label="Descrição da tarefa"
+              v-model="descricaoTarefa"
+              required
+            ></v-textarea>
+            <v-select :items="prioridades" label="Prioridade" outlined required v-model="status"></v-select>
+            <v-btn big color="primary" @click="submit()">Salvar</v-btn>
+          </v-col>
         </v-simple-table>
       </v-col>
     </v-row>
@@ -19,33 +27,34 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   name: "AddToDo",
 
-  data: () => (
-    {
+  data: () => ({
     tituloTarefa: "",
     descricaoTarefa: "",
-    prioridades: ["Alta Prioridade", "Média Prioridade", "Baixa Prioridade"] ,
+    prioridades: ["Alta Prioridade", "Média Prioridade", "Baixa Prioridade"],
+    status: ""
   }),
-  methods:{
+  methods: {
     ...mapActions(["adicionarTarefa"]),
     submit() {
       let tudo = {
+        id: 0,
         tituloTarefa: this.tituloTarefa,
         descricaoTarefa: this.descricaoTarefa,
         status: this.status
-      }
-      this.adicionarTarefa(tudo)
-      this.$router.replace('todo')
+      };
+      this.adicionarTarefa(tudo);
+      this.$router.replace("/");
     }
   }
 };
 </script>
 <style scoped>
 .height-100 {
-    height: 80%;
+  height: 80%;
 }
 </style>
