@@ -7,11 +7,17 @@
         </v-app-bar>
         <v-col cols="12" class="form">
           <v-form>
-            <v-text-field label="E-mail" required></v-text-field>
-            <v-text-field label="Senha" required type="password"></v-text-field>
+            <v-text-field label="E-mail" type="email"></v-text-field>
+            <v-text-field
+              label="Senha"
+              rules.required
+              type="password"
+              v-model="password"
+              rules.senha
+            ></v-text-field>
             <v-text-field label="Confirmar senha" required type="password"></v-text-field>
             <v-row class="justify-space-around">
-              <v-btn color="secondary" class="btn" dark :to="{ name: 'home' }">Cadastrar</v-btn>
+              <v-btn color="secondary" class="btn" dark :to="{name: 'home'}">Cadastrar</v-btn>
             </v-row>
           </v-form>
         </v-col>
@@ -21,10 +27,21 @@
 </template>
 
 <script>
-export default {
-  name: "Home",
 
-  data: () => ({})
+export default {
+  name: "Cadastrar",
+
+  data: () => ({
+    rules: {
+      required: value => !!value || "Campo requerido.",
+      senha: value =>
+        value.length >= 6 || "A senha deve contar com 6 ou mais caracteres",
+      email: value => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "E-mail inválido.";
+      }
+    }
+  })
 };
 </script>
 <style scoped>

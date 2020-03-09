@@ -7,8 +7,7 @@
         </v-app-bar>
         <v-col cols="12" class="form">
           <v-form>
-            <v-text-field label="E-mail" required></v-text-field>
-
+            <v-text-field label="E-mail" type="email" required></v-text-field>
             <v-text-field label="Senha" required type="password"></v-text-field>
             <v-row class="justify-space-around">
               <v-btn color="secondary" class="btn" dark :to="{ name: 'toDo'}">Login</v-btn>

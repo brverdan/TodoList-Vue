@@ -7,10 +7,10 @@
         </v-app-bar>
         <v-simple-table>
             <v-col cols="12" class="align-center">
-              <v-text-field label="Título da Tarefa" type="email" required></v-text-field>
-              <v-textarea auto-grow rows="1" rows-height="2" clearable label="Descrição da tarefa"></v-textarea>
-              <v-select :items="prioridades" label="Prioridade" outlined></v-select>
-              <v-btn big color="primary" :to="{ name: 'toDo'}">Salvar</v-btn>
+              <v-text-field label="Título da Tarefa" type="text" v-model="tituloTarefa" required></v-text-field>
+              <v-textarea auto-grow rows="1" rows-height="2" clearable label="Descrição da tarefa" v-model="descricaoTarefa" required></v-textarea>
+              <v-select :items="prioridades" label="Prioridade" outlined required v-model="status"></v-select>
+              <v-btn big color="primary" @click="submit()">Salvar</v-btn>
             </v-col>
         </v-simple-table>
       </v-col>
@@ -19,12 +19,29 @@
 </template>
 
 <script>
-export default {
-  name: "Home",
+import {mapActions} from 'vuex'
 
-  data: () => ({
-    prioridades: ["Alta Prioridade", "Média Prioridade", "Baixa Prioridade"]
-  })
+export default {
+  name: "AddToDo",
+
+  data: () => (
+    {
+    tituloTarefa: "",
+    descricaoTarefa: "",
+    prioridades: ["Alta Prioridade", "Média Prioridade", "Baixa Prioridade"] ,
+  }),
+  methods:{
+    ...mapActions(["adicionarTarefa"]),
+    submit() {
+      let tudo = {
+        tituloTarefa: this.tituloTarefa,
+        descricaoTarefa: this.descricaoTarefa,
+        status: this.status
+      }
+      this.adicionarTarefa(tudo)
+      this.$router.replace('todo')
+    }
+  }
 };
 </script>
 <style scoped>
