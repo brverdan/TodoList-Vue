@@ -4,6 +4,11 @@
       <v-col cols="7">
         <v-app-bar color="deep-purple accent-4" dark>
           <v-toolbar-title>Adicionar Tarefa</v-toolbar-title>
+          <v-spacer></v-spacer>
+
+      <v-btn icon :to="{name:'toDo'}">
+        <v-icon>reply</v-icon>
+      </v-btn>
         </v-app-bar>
         <v-simple-table>
           <v-col cols="12" class="align-center">
@@ -47,8 +52,12 @@ export default {
         descricaoTarefa: this.descricaoTarefa,
         status: this.status
       };
-      this.adicionarTarefa(tudo);
-      this.$router.replace("/");
+      if (tudo.tituloTarefa && tudo.descricaoTarefa && tudo.status !== "") {
+        this.adicionarTarefa(tudo);
+        this.$router.replace("/");
+      } else {
+        alert("Preencha todos os dados.")
+      }
     }
   }
 };

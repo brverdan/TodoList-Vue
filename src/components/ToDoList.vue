@@ -42,9 +42,14 @@
           </td>
           <td>
             <v-row>
-              <v-col>
+              <v-col class="d-flex align-center"> 
                 <v-checkbox v-model="tarefa.realizada" class="mx-2" label="Success"></v-checkbox>
-                <v-btn big color="primary" @click="deletarTarefa(tarefa.id)">Deletar</v-btn>
+                <v-btn icon @click="deletarTarefa(tarefa.id)">
+                   <v-icon>delete</v-icon>
+                </v-btn>
+                <v-btn icon :to="{ name:'toDoDetails', params: {id: tarefa.id - 1}}">
+                  <v-icon>details</v-icon>
+                </v-btn>
               </v-col>
             </v-row>
           </td>

@@ -4,6 +4,7 @@ import Router from 'vue-router';
 //pages
 import ToDoList from '@/components/ToDoList.vue'
 import AddToDo from '@/components/AddToDo.vue'
+import ToDoDetails from '@/components/ToDoDetails.vue'
 
 Vue.use(Router);
 
@@ -14,9 +15,9 @@ const routes = [
         component: ToDoList
     },
     {
-        name: 'toDo',
+        name: 'toDoDetails',
         path: '/ToDo/:id',
-        component: ToDoList,
+        component: ToDoDetails,
     },
     {
         name: 'addToDo',
