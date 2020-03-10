@@ -47,7 +47,7 @@ export default {
     ...mapActions(["adicionarTarefa"]),
     submit() {
       let tudo = {
-        id: 0,
+        id: 45,
         tituloTarefa: this.tituloTarefa,
         descricaoTarefa: this.descricaoTarefa,
         status: this.status
