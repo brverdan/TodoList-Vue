@@ -2,9 +2,7 @@
   <v-container class="width-50">
     <v-app-bar color="deep-purple accent-4" dark>
       <v-toolbar-title>TAREFAS</v-toolbar-title>
-
       <v-spacer></v-spacer>
-
       <v-btn icon :to="{name:'addToDo'}">
         <v-icon>add</v-icon>
       </v-btn>
@@ -43,11 +41,11 @@
           <td>
             <v-row>
               <v-col class="d-flex align-center"> 
-                <v-checkbox v-model="tarefa.realizada" class="mx-2" label="Success"></v-checkbox>
+                <v-checkbox v-model="tarefa.realizada" class="mx-2" label="Realizada"></v-checkbox>
                 <v-btn icon @click="deletarTarefa(tarefa.id)">
                    <v-icon>delete</v-icon>
                 </v-btn>
-                <v-btn icon :to="{ name:'toDoDetails', params: {id: tarefa.id - 1}}">
+                <v-btn icon :to="{ name:'toDoDetails', params: {id: index}}">
                   <v-icon>details</v-icon>
                 </v-btn>
               </v-col>

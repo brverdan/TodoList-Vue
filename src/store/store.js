@@ -52,7 +52,7 @@ const store = new Vuex.Store({
         tudo: [{}]
     },
     mutations: {
-        novaTarefa: (state, tarefa) => state.tarefas.unshift(tarefa),
+        novaTarefa: (state, tarefa) => state.tarefas.push(tarefa),
         deletarTarefa: (state, id) => (state.tarefas = state.tarefas.filter(t => t.id !== id))
     },
     getters: {
