@@ -74,16 +74,7 @@ export default {
         return "";
       }
     },
-    ...mapActions(["deletarTarefa", "editarTarefa"]),
-    editarTarefa(tarefa) {
-      const up = {
-        id: tarefa.id,
-        tituloTarefa: tarefa.tituloTarefa,
-        descricaoTarefa: tarefa.descricaoTarefa,
-        realizada: true
-      };
-      this.editarTarefa(up);
-    }
+    ...mapActions(["deletarTarefa", "editarTarefa"])
   },
   computed: {
     ...mapState({

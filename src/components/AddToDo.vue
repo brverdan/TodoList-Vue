@@ -6,9 +6,9 @@
           <v-toolbar-title>Adicionar Tarefa</v-toolbar-title>
           <v-spacer></v-spacer>
 
-      <v-btn icon :to="{name:'toDo'}">
-        <v-icon>reply</v-icon>
-      </v-btn>
+          <v-btn icon :to="{name:'toDo'}">
+            <v-icon>reply</v-icon>
+          </v-btn>
         </v-app-bar>
         <v-simple-table>
           <v-col cols="12" class="align-center">
@@ -56,7 +56,7 @@ export default {
         this.adicionarTarefa(tudo);
         this.$router.replace("/");
       } else {
-        alert("Preencha todos os dados.")
+        alert("Preencha todos os dados.");
       }
     }
   }

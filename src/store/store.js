@@ -60,13 +60,13 @@ const store = new Vuex.Store({
     },
     actions: {
         adicionarTarefa({ commit }, tudo) {
-            let id = this.state.tarefas.length + 1
+            let id = this.state.tarefas[this.state.tarefas.length - 1].id + 1
             tudo.id = id
             commit("novaTarefa", tudo)
         },
         deletarTarefa({ commit }, index) {
             commit("deletarTarefa", index)
-        },
+        }
     }
 });
 
