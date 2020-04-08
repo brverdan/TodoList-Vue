@@ -3,7 +3,7 @@
     <v-app-bar color="deep-purple accent-4" dark>
       <v-toolbar-title>TAREFAS</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon :to="{name:'addToDo'}">
+      <v-btn icon :to="{ name:'addToDo' }">
         <v-icon>add</v-icon>
       </v-btn>
     </v-app-bar>
@@ -15,24 +15,24 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(tarefa, index) in listaTarefas" :key="index">
+        <tr v-for="t in allTarefas" :key="t.id">
           <td>
             <v-row>
               <v-col>
                 <v-expansion-panels>
                   <v-expansion-panel
-                    :class="tarefa.realizada == true ? 'success' : tipoDePrioridade(tarefa.status)"
+                    :class="t.realizada == true ? 'success' : tipoDePrioridade(t.status)"
                   >
                     <v-expansion-panel-header id="tarefa" disable-icon-rotate>
-                      {{tarefa.tituloTarefa}}
-                      <template v-if="tarefa.realizada" v-slot:actions>
+                      {{ t.tituloTarefa }}
+                      <template v-if="t.realizada" v-slot:actions>
                         <v-icon>mdi-check</v-icon>
                       </template>
-                      <template v-else-if="tarefa.status == 'Alta Prioridade'" v-slot:actions>
+                      <template v-else-if="t.status == 'Alta Prioridade'" v-slot:actions>
                         <v-icon>mdi-alert-circle</v-icon>
                       </template>
                     </v-expansion-panel-header>
-                    <v-expansion-panel-content>{{tarefa.descricaoTarefa}}</v-expansion-panel-content>
+                    <v-expansion-panel-content>{{ t.descricaoTarefa }}</v-expansion-panel-content>
                   </v-expansion-panel>
                 </v-expansion-panels>
               </v-col>
@@ -40,12 +40,12 @@
           </td>
           <td>
             <v-row>
-              <v-col class="d-flex align-center"> 
-                <v-checkbox v-model="tarefa.realizada" class="mx-2" label="Realizada"></v-checkbox>
-                <v-btn icon @click="deletarTarefa(tarefa.id)">
-                   <v-icon>delete</v-icon>
+              <v-col class="d-flex align-center">
+                <v-checkbox v-model="t.realizada" class="mx-2" label="Realizada"></v-checkbox>
+                <v-btn icon @click="deletarTarefa(t.id)">
+                  <v-icon>delete</v-icon>
                 </v-btn>
-                <v-btn icon :to="{ name:'toDoDetails', params: {id: index}}">
+                <v-btn icon :to="{ name:'toDoDetails', params: {id: t.id}}">
                   <v-icon>details</v-icon>
                 </v-btn>
               </v-col>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "TodoList",
@@ -74,22 +74,13 @@ export default {
         return "";
       }
     },
-    ...mapActions(["deletarTarefa", "editarTarefa"]),
-    editarTarefa(tarefa) {
-      const up = {
-        id: tarefa.id,
-        tituloTarefa: tarefa.tituloTarefa,
-        descricaoTarefa: tarefa.descricaoTarefa,
-        realizada: true
-      };
-      this.editarTarefa(up);
-    }
+    ...mapActions(["deletarTarefa", "getTarefas"]),
   },
   computed: {
-    ...mapState({
-      tarefasState: store => store.state.tarefas
-    }),
-    ...mapGetters(["listaTarefas"])
+    ...mapGetters(["allTarefas"])
+  },
+  created() {
+     this.getTarefas();
   }
 };
 </script>
